@@ -1,8 +1,8 @@
-const Button = ({ Bgcolor = "bg-black", children, onClick }) => {
+const Button = ({ Bgcolor = "bg-black", children, onClick, width }) => {
   return (
     <>
       <button
-        className={`h-10 px-6 font-semibold rounded-md ${Bgcolor} text-white`}
+        className={`h-10 px-6 font-semibold rounded-md ${Bgcolor} ${width} text-white hover:opacity-75`}
         type="submit"
         onClick={onClick}
       >

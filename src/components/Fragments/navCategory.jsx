@@ -40,7 +40,14 @@ const Category = () => {
   // const [sportOnclick, setSportOnclick] = useState(false);
   return (
     <ul className="bg-[#e4e4e4] px-3  p-2">
-      <li onClick={() => setMenOnclick(!menOnclick)}>Men</li>
+      <li
+        onClick={() => {
+          setMenOnclick(!menOnclick);
+          ladiesOnclick ? setMenOnclick(!menOnclick) : menOnclick;
+        }}
+      >
+        Men
+      </li>
       {menOnclick ? <ProductPria /> : ""}
 
       <li

@@ -1,6 +1,21 @@
 import { useState } from "react";
 import ButtonBuy from "../Elements/Button/ButtonBuy";
 
+const images = [
+  {
+    image:
+      "https://hm-media-prod.s3.amazonaws.com/pub/media/catalog/product/medium/1dacdd4db2da36eb1bf34ec531c6150f216e1055_xxl-1.jpg",
+  },
+  {
+    image:
+      "https://hm-media-prod.s3.amazonaws.com/pub/media/catalog/product/medium/1dacdd4db2da36eb1bf34ec531c6150f216e1055_xxl-1.jpg",
+  },
+  {
+    image:
+      "https://hm-media-prod.s3.amazonaws.com/pub/media/catalog/product/medium/1dacdd4db2da36eb1bf34ec531c6150f216e1055_xxl-1.jpg",
+  },
+];
+
 const ProductDetail = () => {
   const [buy, setBuy] = useState(0);
 
@@ -12,10 +27,9 @@ const ProductDetail = () => {
       <div className="max-w-none text-lg m-5 sm:m-7 ">
         <div className="flex flex-col ">
           <div className=" flex flex-row overflow-x-scroll my-5 border-2 shadow-md">
-            <img
-              src="https://hm-media-prod.s3.amazonaws.com/pub/media/catalog/product/medium/1dacdd4db2da36eb1bf34ec531c6150f216e1055_xxl-1.jpg"
-              alt=""
-            />
+            {images.map((e) => (
+              <img src={e.image} alt="" />
+            ))}
           </div>
           <div className="flex flex-col text-lg">
             <h3 className="font-bold 2">Lorem ipsum dolor sit amet.</h3>

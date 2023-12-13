@@ -33,15 +33,19 @@ const Login = () => {
       });
   };
 
+  const onRegister = () => {
+    return navigate("/register");
+  };
+
   return (
     <>
-      <div className="flex gap-5 justify-center bg-blue-600 min-h-screen items-center">
-        <div className="bg-slate-500 p-8">
-          <h1 className="text-white text-3xl font-bold mb-2">Login</h1>
-          <p className="font-medium text-white">
-            Welcome, Please enter your details
-          </p>
-          <div className="mb-6">
+      <div className="flex flex-col justify-center min-h-screen text-black mx-5 gap-y-7">
+        <div className="">
+          <h1 className="text-3xl font-bold mb-2">Login</h1>
+          <p className="font-medium ">Welcome, Please enter your details</p>
+        </div>
+        <div className="gap-y-5">
+          <div className="mb-5">
             <Input
               label="Email"
               name="email"
@@ -50,7 +54,7 @@ const Login = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-10">
             <Input
               label="Password"
               name="password"
@@ -59,8 +63,19 @@ const Login = () => {
               onChange={handleChangePassword}
             />
           </div>
-          <div className="mb-6">
-            <Button onClick={onLogin}>Login</Button>
+
+          <div className="flex flex-col">
+            <Button onClick={onLogin} width={"w-full"}>
+              Login
+            </Button>
+            <div className="flex justify-center items-center gap-3  ">
+              <span className="w-full h-[2px]  bg-black"></span>
+              <p>OR</p>
+              <span className="w-full h-[2px]  bg-black"></span>
+            </div>
+            <Button onClick={onRegister} width={"w-full"}>
+              Register
+            </Button>
           </div>
         </div>
       </div>

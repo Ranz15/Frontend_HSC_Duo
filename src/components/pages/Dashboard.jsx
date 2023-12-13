@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../Elements/Button/Button";
+import NavCategory from "../Fragments/navCategory";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <NavCategory />
       <h1>Welcome to Dashboard</h1>
       <Button onClick={Logout}>Logout </Button>
     </>

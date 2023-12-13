@@ -4,6 +4,7 @@ import "./index.css";
 import Login from "./components/pages/Login";
 import Dashboard from "./components/pages/Dashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProductDetail from "./components/pages/productDetail";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/product-detail",
+    element: <ProductDetail />,
   },
 ]);
 

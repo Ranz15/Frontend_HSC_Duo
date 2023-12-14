@@ -35,9 +35,14 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex gap-5 justify-center bg-blue-600 min-h-screen items-center">
-        <div className="bg-slate-500 p-8">
-          <h1 className="text-white text-3xl font-bold mb-2">Login</h1>
+      <div
+        className="flex gap-5 justify-center min-h-screen items-center"
+        data-theme="valentine"
+      >
+        <div className=" p-8" data-theme="aqua">
+          <h1 className="text-white text-4xl font-bold mb-2 text-center">
+            Login
+          </h1>
           <p className="font-medium text-white">
             Welcome, Please enter your details
           </p>
@@ -60,7 +65,9 @@ const Login = () => {
             />
           </div>
           <div className="mb-6">
-            <Button onClick={onLogin}>Login</Button>
+            <Button onClick={onLogin} Bgcolor={"bg-blue-500"} width="w-full">
+              Login
+            </Button>
           </div>
         </div>
       </div>

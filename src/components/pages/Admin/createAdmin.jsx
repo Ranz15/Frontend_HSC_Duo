@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../Elements/Input";
 import Select from "../../Elements/Select/Select";
 import Button from "../../Elements/Button/Button";
 import axios from "axios";
+import Navbar from "../../Fragments/Navbar";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Create = () => {
   // useState
@@ -24,9 +26,14 @@ const Create = () => {
     username: "",
     email: "",
     password: "",
-    gender: "",
+    gender: false,
     phone: "",
   });
+
+  const { id } = useParams();
+  console.log(param);
+
+  const navigate = useNavigate();
 
   const bodyParameters = {
     fullname: data.fullname,
@@ -57,23 +64,68 @@ const Create = () => {
     // e.preventDefault();
     // console.log(data);
 
-    // API Post Data
-    axios
-      .post("http://localhost:3030/seller/create", bodyParameters, config)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error.response.data.message);
-      });
+    if (id === "new") {
+      // API Post Data
+      axios
+        .post("http://localhost:3030/seller/create", bodyParameters, config)
+        .then(function (response) {
+          console.log(response);
+          navigate("/admin/list");
+        })
+        .catch(function (error) {
+          console.log(error.response.data.message);
+        });
+    } else {
+      // API PUT DATA
+      axios
+        .patch("http://localhost:3030/seller/" + id, bodyParameters, config)
+        .then(function (response) {
+          console.log(response);
+          navigate("/admin/list");
+        })
+        .catch(function (error) {
+          console.log(error.response.data.message);
+        });
+    }
   };
+
+  const handleUpdate = (e) => {
+    // API GET DATA
+    axios.get("http://localhost:3030/seller/" + id).then(function (response) {
+      setData({
+        ...data,
+        fullname: response.data.data.fullName,
+        dob: response.data.data.dateofBirth,
+        address: response.data.data.address,
+        username: response.data.data.username,
+        email: response.data.data.email,
+        password: response.data.data.password,
+        gender: response.data.data.gender,
+        phone: response.data.data.phone_number,
+      });
+      console.log(response);
+    });
+  };
+
+  useEffect(() => {
+    if (id) {
+      handleUpdate();
+    } else {
+      handleSubmit();
+    }
+  }, [id]);
 
   return (
     <>
-      <div className="flex gap-5 justify-center bg-gray-700 min-h-screen items-center">
-        <div className="bg-slate-400 p-10 rounded-md">
-          <h1 className="text-white text-3xl font-bold border-b-2 pb-3 text-center">
-            Create Data Admin
+      <Navbar />
+
+      <div
+        className="flex gap-5 justify-center min-h-screen items-center"
+        data-theme="valentine"
+      >
+        <div className="p-5 rounded-md outline outline-4 outline-slate-300 shadow-xl">
+          <h1 className="text-black text-3xl font-bold border-b-2 pb-3 text-center">
+            {id === "new" ? "Tambah Data Admin" : "Update Data Admin"}
           </h1>
           <Input
             type="text"
@@ -81,6 +133,7 @@ const Create = () => {
             name="fullname"
             value={data.fullname}
             onChange={handleChange}
+            inputText="text-black"
           />
           <Input
             type="date"
@@ -134,7 +187,7 @@ const Create = () => {
           />
 
           <div className="flex justify-center mt-2">
-            <Button type="submit" onClick={handleSubmit}>
+            <Button type="submit" onClick={handleSubmit} width="w-full">
               Submit
             </Button>
           </div>

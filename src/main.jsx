@@ -5,6 +5,7 @@ import Login from "./components/pages/Login";
 import Dashboard from "./components/pages/Dashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Create from "./components/pages/Admin/createAdmin";
+import ListData from "./components/pages/Admin/listDataAdmin";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +17,12 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path: "/admin/create",
+    path: "/admin/:id",
     element: <Create />,
+  },
+  {
+    path: "/admin/list",
+    element: <ListData />,
   },
 ]);
 

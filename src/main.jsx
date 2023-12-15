@@ -5,7 +5,10 @@ import Login from "./components/pages/Login";
 import Dashboard from "./components/pages/Dashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Create from "./components/pages/Admin/createAdmin";
+import ProductDetail from "./components/pages/productDetail";
+import Register from "./components/pages/register";
 import ListData from "./components/pages/Admin/listDataAdmin";
+
 
 const router = createBrowserRouter([
   {
@@ -17,6 +20,14 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
+    path: "/product-detail",
+    element: <ProductDetail />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+    {
     path: "/admin/:id",
     element: <Create />,
   },

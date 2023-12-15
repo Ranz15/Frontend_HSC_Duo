@@ -9,7 +9,7 @@ const Input = ({
 }) => {
   return (
     <>
-      <label htmlFor={name} className={`block inputText text-sm mb-2`}>
+      <label htmlFor={name} className="block text-sm mb-2">
         {label}
       </label>
 
@@ -19,7 +19,7 @@ const Input = ({
         id={name}
         name={name}
         value={value}
-        className={`text-sm border rounded-w-full w-full py-2 px-2 placeholder:opacity-10 ${inputBg} ${inputText}`}
+        className="bg-white text-sm border rounded-w-full w-full py-2 px-2 text-black placeholder:opacity-10"
       />
     </>
   );

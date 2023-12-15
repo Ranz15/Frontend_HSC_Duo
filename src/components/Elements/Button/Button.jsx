@@ -1,13 +1,8 @@
-const Button = ({
-  btnUI = "btn-primary",
-  children,
-  onClick,
-  width = "w-auto",
-}) => {
+const Button = ({ Bgcolor = "bg-black", children, onClick, width }) => {
   return (
     <>
       <button
-        className={`btn ${btnUI} ${width} h-5 px-6 font-semibold rounded-md text-white sm:btn-sm md:btn-md`}
+        className={`h-10 px-6 font-semibold rounded-md ${Bgcolor} ${width} text-white hover:opacity-75`}
         type="submit"
         onClick={onClick}
       >

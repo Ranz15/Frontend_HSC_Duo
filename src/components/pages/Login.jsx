@@ -46,6 +46,7 @@ const Login = () => {
         </div>
         <div className="gap-y-5">
           <div className="mb-5">
+
             <Input
               label="Email"
               name="email"
@@ -63,7 +64,6 @@ const Login = () => {
               onChange={handleChangePassword}
             />
           </div>
-
           <div className="flex flex-col">
             <Button onClick={onLogin} width={"w-full"}>
               Login
@@ -76,6 +76,7 @@ const Login = () => {
             <Button onClick={onRegister} width={"w-full"}>
               Register
             </Button>
+
           </div>
         </div>
       </div>

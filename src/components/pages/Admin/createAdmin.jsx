@@ -31,7 +31,7 @@ const Create = () => {
   });
 
   const { id } = useParams();
-  console.log(param);
+  console.log(id);
 
   const navigate = useNavigate();
 

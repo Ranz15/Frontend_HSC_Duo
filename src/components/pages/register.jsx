@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../Elements/Button/Button";
 import Input from "../Elements/Input/index";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -101,6 +101,11 @@ const Register = () => {
             <Button onClick={onRegister} width={"w-full"}>
               Register
             </Button>
+          </div>
+          <div className="flex justify-center items-center">
+            <p className="text-xl">
+              have account ? <Link to={"/"}>Sign in</Link>
+            </p>
           </div>
         </div>
       </div>

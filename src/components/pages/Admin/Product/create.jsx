@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Input from "../../Elements/Input";
-import Select from "../../Elements/Select/Select";
-import Button from "../../Elements/Button/Button";
+import Input from "../../../Elements/Input";
+import Select from "../../../Elements/Select/Select";
+import Button from "../../../Elements/Button/Button";
 import axios from "axios";
-import Navbar from "../../Fragments/Navbar";
+import Navbar from "../../../Fragments/navBarAdmin";
 import { useNavigate, useParams } from "react-router-dom";
 
-const Create = () => {
+const CreateProduct = () => {
   // useState
   // Cara 1
   // const [fullname, setFullName] = useState("");
@@ -20,14 +20,14 @@ const Create = () => {
 
   // Cara 2
   const [data, setData] = useState({
-    fullname: "",
-    dob: "",
-    address: "",
-    username: "",
-    email: "",
-    password: "",
-    gender: false,
-    phone: "",
+    category_name: "",
+    category_name: "",
+    category_name: "",
+    category_name: "",
+    category_name: "",
+    category_name: "",
+    category_name: "",
+    category_name: "",
   });
 
   const { id } = useParams();
@@ -36,14 +36,7 @@ const Create = () => {
   const navigate = useNavigate();
 
   const bodyParameters = {
-    fullname: data.fullname,
-    dob: data.dob,
-    address: data.address,
-    username: data.username,
-    email: data.email,
-    password: data.password,
-    gender: data.gender,
-    phone: data.phone,
+    name_category: data.category_name,
   };
 
   const auth = localStorage.getItem("token");
@@ -67,21 +60,29 @@ const Create = () => {
     if (id === "new") {
       // API Post Data
       axios
-        .post("http://localhost:3030/seller/create", bodyParameters, config)
+        .post(
+          import.meta.env.VITE_API_Category + "/create",
+          bodyParameters,
+          config
+        )
         .then(function (response) {
           console.log(response);
-          navigate("/admin/list");
+          navigate("/admin/category/list");
         })
         .catch(function (error) {
           console.log(error.response.data.message);
         });
     } else {
-      // API PUT DATA
+      // API PATCH DATA
       axios
-        .patch("http://localhost:3030/seller/" + id, bodyParameters, config)
+        .patch(
+          import.meta.env.VITE_API_Category + "/" + id,
+          bodyParameters,
+          config
+        )
         .then(function (response) {
           console.log(response);
-          navigate("/admin/list");
+          navigate("/admin/category/list");
         })
         .catch(function (error) {
           console.log(error.response.data.message);
@@ -91,20 +92,15 @@ const Create = () => {
 
   const handleUpdate = (e) => {
     // API GET DATA
-    axios.get("http://localhost:3030/seller/" + id).then(function (response) {
-      setData({
-        ...data,
-        fullname: response.data.data.fullName,
-        dob: response.data.data.dateofBirth,
-        address: response.data.data.address,
-        username: response.data.data.username,
-        email: response.data.data.email,
-        password: response.data.data.password,
-        gender: response.data.data.gender,
-        phone: response.data.data.phone_number,
+    axios
+      .get(import.meta.env.VITE_API_Category + "/" + id)
+      .then(function (response) {
+        setData({
+          ...data,
+          category_name: response.data.data.categoryName,
+        });
+        console.log(response);
       });
-      console.log(response);
-    });
   };
 
   useEffect(() => {
@@ -114,6 +110,8 @@ const Create = () => {
       handleSubmit();
     }
   }, [id]);
+
+  console.log(data);
 
   return (
     <>
@@ -125,65 +123,63 @@ const Create = () => {
       >
         <div className="p-5 rounded-md outline outline-4 outline-slate-300 shadow-xl">
           <h1 className="text-black text-3xl font-bold border-b-2 pb-3 text-center">
-            {id === "new" ? "Tambah Data Admin" : "Update Data Admin"}
+            {id === "new" ? "Tambah Data Product" : "Update Data Product"}
           </h1>
           <Input
             type="text"
-            label="Full Name"
-            name="fullname"
-            value={data.fullname}
+            label="Product Name"
+            name="category_name"
+            value={data.category_name}
             onChange={handleChange}
             inputText="text-black"
           />
           <Input
-            type="date"
-            label="Date of Birth"
-            name="dob"
-            value={data.dob}
+            type="text"
+            label="Category Name"
+            name="category_name"
+            value={data.category_name}
             onChange={handleChange}
+            inputText="text-black"
           />
           <Input
             type="text"
-            label="Address"
-            name="address"
-            value={data.address}
+            label="Seller Name"
+            name="seller_name"
+            value={data.category_name}
             onChange={handleChange}
+            inputText="text-black"
           />
           <Input
             type="text"
-            label="Username"
-            name="username"
-            value={data.username}
+            label="Price"
+            name="price"
+            value={data.category_name}
             onChange={handleChange}
+            inputText="text-black"
           />
           <Input
-            type="email"
-            label="Email"
-            name="email"
-            value={data.email}
+            type="text"
+            label="description"
+            name="description"
+            value={data.category_name}
             onChange={handleChange}
+            inputText="text-black"
           />
           <Input
-            type="password"
-            label="Password"
-            name="password"
-            value={data.password}
+            type="text"
+            label="Stock"
+            name="stock"
+            value={data.category_name}
             onChange={handleChange}
+            inputText="text-black"
           />
-          <Select
-            label="Gender"
-            name="gender"
-            value={0}
-            value2={1}
-            onChange={handleChange}
-          />
-
           <Input
-            type="number"
-            label="Phone Number"
-            name="phone"
-            value={data.phone}
+            type="file"
+            label="Thumbnail"
+            name="thumbnail"
+            value={data.category_name}
             onChange={handleChange}
+            inputText="text-black"
           />
 
           <div className="flex justify-center mt-2">
@@ -197,4 +193,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default CreateProduct;

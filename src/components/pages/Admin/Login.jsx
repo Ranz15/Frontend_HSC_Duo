@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Button from "../Elements/Button/Button";
-import Input from "../Elements/Input/index";
+import Button from "../../Elements/Button/Button";
+import Input from "../../Elements/Input/index";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -19,14 +19,14 @@ const Login = () => {
 
   const onLogin = () => {
     axios
-      .post("http://localhost:3030/login/buyer", {
+      .post(import.meta.env.VITE_API_Login + "/buyer", {
         username: username,
         password: password,
       })
       .then(function (response) {
-        console.log(response.data.token);
+        // console.log(response.data.token);
         localStorage.setItem("token", response.data.token);
-        navigate("/dashboard");
+        navigate("/");
       })
       .catch(function (error) {
         alert(error.response.data.message);
@@ -46,7 +46,6 @@ const Login = () => {
         </div>
         <div className="gap-y-5">
           <div className="mb-5">
-
             <Input
               label="Email"
               name="email"
@@ -76,7 +75,6 @@ const Login = () => {
             <Button onClick={onRegister} width={"w-full"}>
               Register
             </Button>
-
           </div>
         </div>
       </div>

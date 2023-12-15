@@ -1,6 +1,6 @@
 import { useState } from "react";
-import NavCategory from "../Fragments/hamburgerMenu";
-import NavBar from "../Fragments/navBar";
+import NavCategory from "../../Fragments/hamburgerMenu";
+import NavBar from "../../Fragments/navBarAdmin";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {

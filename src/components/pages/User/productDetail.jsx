@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import ButtonBuy from "../Elements/Button/ButtonBuy";
+import ButtonBuy from "../../Elements/Button/ButtonBuy";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { data } from "autoprefixer";
-import NavBar from "../Fragments/navBar";
+import NavBar from "../../Fragments/navBarAdmin";
 
 const ProductDetail = () => {
   const [buy, setBuy] = useState(0);

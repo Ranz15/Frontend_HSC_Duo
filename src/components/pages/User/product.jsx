@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import NavBar from "../Fragments/navBar";
+import NavBar from "../../Fragments/navBarAdmin";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Category from "../Fragments/category";
+import Category from "../../Fragments/category";
 
 const Product = () => {
   const navigate = useNavigate();

@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Navbar from "../../Fragments/Navbar";
+import Navbar from "../../../Fragments/navBarAdmin";
 import { data } from "autoprefixer";
-import Button from "../../Elements/Button/Button";
+import Button from "../../../Elements/Button/Button";
 import { useNavigate } from "react-router-dom";
 
-const ListData = () => {
-  const [dataSeller, setDataSeller] = useState();
-  const [isLoadingSeller, setIsLoadingSeller] = useState(false);
+const ListBuyer = () => {
+  const [dataBuyer, setDataBuyer] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const auth = localStorage.getItem("token");
   const config = {
@@ -17,13 +17,11 @@ const ListData = () => {
   // Call API Select (GET)
   const getData = async () => {
     try {
-      const { data } = await axios.get(
-        import.meta.env.VITE_API_Seller + "/all"
-      );
+      const { data } = await axios.get(import.meta.env.VITE_API_Buyer + "/all");
 
       if (data) {
-        setDataSeller(data);
-        setIsLoadingSeller(false);
+        setDataBuyer(data);
+        setIsLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +51,10 @@ const ListData = () => {
 
       <div className="overflow-x-auto mt-10">
         <div>
-          <Button btnUI="btn-primary" onClick={() => navigate("/admin/new")}>
+          <Button
+            btnUI="btn-primary"
+            onClick={() => navigate("/admin/buyer/new")}
+          >
             New Data
           </Button>
         </div>
@@ -73,10 +74,10 @@ const ListData = () => {
             </tr>
           </thead>
           <tbody className="text-xs">
-            {isLoadingSeller ? <div>Data sedang dimuat</div> : <></>}
-            {dataSeller && isLoadingSeller === false ? (
+            {isLoading ? <div>Data sedang dimuat</div> : <></>}
+            {dataBuyer && isLoading === false ? (
               <>
-                {dataSeller.data.map((item, key) => {
+                {dataBuyer.data.map((item, key) => {
                   return (
                     <tr className="hover" key={item.id}>
                       <th>{key + 1}</th>
@@ -90,7 +91,7 @@ const ListData = () => {
                       <td>
                         <Button
                           btnUI="btn-info"
-                          onClick={() => navigate(`/admin/${item.id}`)}
+                          onClick={() => navigate(`/admin/buyer/${item.id}`)}
                         >
                           Edit
                         </Button>
@@ -117,4 +118,4 @@ const ListData = () => {
   );
 };
 
-export default ListData;
+export default ListBuyer;

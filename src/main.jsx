@@ -1,25 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Login from "./components/pages/Login";
-import Dashboard from "./components/pages/Dashboard";
+import Login from "./components/pages/User/Login";
+import Dashboard from "./components/pages/Admin/Dashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Create from "./components/pages/Admin/createAdmin";
-import ProductDetail from "./components/pages/productDetail";
-import Register from "./components/pages/register";
-import ListData from "./components/pages/Admin/listDataAdmin";
-
-import LandingPage from "./components/pages/landingPage";
-import Product from "./components/pages/product";
+import ProductDetail from "./components/pages/User/productDetail";
+import Register from "./components/pages/User/register";
+import ListSeller from "./components/pages/Admin/Seller/listSeller";
+import Product from "./components/pages/User/product";
+import ListCategory from "./components/pages/Admin/Category/listCategory";
+import CreateSeller from "./components/pages/Admin/Seller/create";
+import CreateCategory from "./components/pages/Admin/Category/create";
+import CreateBuyer from "./components/pages/Admin/Buyer/create";
+import ListBuyer from "./components/pages/Admin/Buyer/listBuyer";
+import ListProduct from "./components/pages/Admin/Product/listProduct";
+import CreateProduct from "./components/pages/Admin/Product/create";
 
 const router = createBrowserRouter([
+  // USER SECTION
+  // {
+  //   path: "/",
+  //   element: <LandingPage />,
+  // },
   {
     path: "/login",
     element: <Login />,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/user/dashboard",
+    element: <Login />,
   },
   {
     path: "/product",
@@ -33,17 +42,58 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+
+  // ADMIN SECTION
+  // Login
   {
-    path: "/admin/:id",
-    element: <Create />,
+    path: "/admin/login",
+    element: <Login />,
+  },
+
+  // Dashboard
+  {
+    path: "/admin/dashboard",
+    element: <Dashboard />,
+  },
+
+  // Data Seller
+  {
+    path: "/admin/seller/:id",
+    element: <CreateSeller />,
   },
   {
     path: "/admin/list",
-    element: <ListData />,
+    element: <ListSeller />,
+  },
+
+  // Data Category
+  {
+    path: "/admin/category/:id",
+    element: <CreateCategory />,
   },
   {
-    path: "/",
-    element: <LandingPage />,
+    path: "/admin/category/list",
+    element: <ListCategory />,
+  },
+
+  // Data Buyer
+  {
+    path: "/admin/buyer/:id",
+    element: <CreateBuyer />,
+  },
+  {
+    path: "/admin/buyer/list",
+    element: <ListBuyer />,
+  },
+
+  // Data Product
+  {
+    path: "/admin/product/:id",
+    element: <CreateProduct />,
+  },
+  {
+    path: "/admin/product/list",
+    element: <ListProduct />,
   },
 ]);
 

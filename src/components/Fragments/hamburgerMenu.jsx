@@ -2,29 +2,29 @@ import { useState } from "react";
 
 const ProductPria = () => {
   return (
-    <ul className="ml-5">
+    <ul className="ml-5 font-normal">
       <li>T-Shirt</li>
       <li>Shirt</li>
-      <li>Hood</li>
-      <li>Shoes</li>
+      <li>Sweatshirt</li>
+      <li>Trousers</li>
     </ul>
   );
 };
 
 const ProductLadies = () => {
   return (
-    <ul className="ml-5">
+    <ul className="ml-5 font-normal">
       <li>T-Shirt</li>
       <li>Shirt</li>
       <li>Sweatshirt</li>
-      <li>Shoes</li>
+      <li>Trousers</li>
     </ul>
   );
 };
 
 const ProductKids = () => {
   return (
-    <ul className="ml-5">
+    <ul className="ml-5 font-normal">
       <li>T-Shirt</li>
       <li>Shirt</li>
       <li>Sweatshirt</li>
@@ -39,7 +39,7 @@ const Category = () => {
   const [kidsOnclick, setKidsOnclick] = useState(false);
   // const [sportOnclick, setSportOnclick] = useState(false);
   return (
-    <ul className="bg-[#e4e4e4] px-3  p-2">
+    <ul className="absolute flex flex-col text-xl font-bold bg-[#e4e4e4] px-3 p-2 w-4/5 h-screen left-0 top-0">
       <li
         onClick={() => {
           setMenOnclick(!menOnclick);
@@ -71,7 +71,7 @@ const Category = () => {
   );
 };
 
-const NavCategory = () => {
+const HamburgerMenu = () => {
   const [active, setActive] = useState(false);
   return (
     <div>
@@ -89,4 +89,4 @@ const NavCategory = () => {
   );
 };
 
-export default NavCategory;
+export default HamburgerMenu;

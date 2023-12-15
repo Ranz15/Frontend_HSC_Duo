@@ -9,10 +9,12 @@ import ProductDetail from "./components/pages/productDetail";
 import Register from "./components/pages/register";
 import ListData from "./components/pages/Admin/listDataAdmin";
 
+import LandingPage from "./components/pages/landingPage";
+import Product from "./components/pages/product";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
   },
   {
@@ -20,20 +22,28 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path: "/product-detail",
+    path: "/product",
+    element: <Product />,
+  },
+  {
+    path: "/product-detail/:id",
     element: <ProductDetail />,
   },
   {
     path: "/register",
     element: <Register />,
   },
-    {
+  {
     path: "/admin/:id",
     element: <Create />,
   },
   {
     path: "/admin/list",
     element: <ListData />,
+  },
+  {
+    path: "/",
+    element: <LandingPage />,
   },
 ]);
 

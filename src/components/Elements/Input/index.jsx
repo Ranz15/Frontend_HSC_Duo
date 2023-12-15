@@ -1,4 +1,12 @@
-const Input = ({ label, name, value, onChange, type }) => {
+const Input = ({
+  label,
+  name,
+  value,
+  onChange,
+  type,
+  inputBg = "bg-white",
+  inputText = "text-black",
+}) => {
   return (
     <>
       <label htmlFor={name} className="block text-sm mb-2">

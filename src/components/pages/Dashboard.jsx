@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../Elements/Button/Button";
-import NavCategory from "../Fragments/navCategory";
+import NavCategory from "../Fragments/hamburgerMenu";
 
 const Dashboard = () => {
   const navigate = useNavigate();

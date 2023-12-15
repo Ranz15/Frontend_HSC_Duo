@@ -7,10 +7,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Create from "./components/pages/Admin/createAdmin";
 import ProductDetail from "./components/pages/productDetail";
 import Register from "./components/pages/register";
+import LandingPage from "./components/pages/landingPage";
+import Product from "./components/pages/product";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
   },
   {
@@ -18,7 +20,11 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path: "/product-detail",
+    path: "/product",
+    element: <Product />,
+  },
+  {
+    path: "/product-detail/:id",
     element: <ProductDetail />,
   },
   {
@@ -28,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/",
+    element: <LandingPage />,
   },
 ]);
 

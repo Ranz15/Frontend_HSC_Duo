@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-slate-300">
+      <div className="navbar bg-[#e4e4e4] font-bold text-black px-5 ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,51 +33,55 @@ const Navbar = () => {
             {/* Responsive / Burger Menu */}
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black  "
             >
               <li>
-                <Link to="/admin/list">Admin</Link>
+                <Link to="/product/category/1">Men</Link>
               </li>
               <li>
-                <Link to="/admin/list">Category</Link>
+                <Link to="/product/category/2">Ladies</Link>
               </li>
               <li>
-                <Link to="/admin/list">Buyer</Link>
+                <Link to="/product/category/3">Kids</Link>
               </li>
               <li>
-                <Link to="/admin/list">Product</Link>
+                <Link to="/user/product">All Product</Link>
               </li>
               <li>
-                <Link to="/admin/list">Transaction</Link>
+                <Link to="/transaction">My Transaction</Link>
               </li>
             </ul>
           </div>
-          <Link to="/dashboard" className="btn btn-ghost text-xl text-red-400">
-            H&M
+          <Link to={"/user/dashboard"}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/53/H%26M-Logo.svg"
+              className="w-10 sm:w-12 lg:ml-5"
+              alt=""
+            />
           </Link>
         </div>
         {/* Normal Menu */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link to="/admin/list">Admin</Link>
+          <ul className="menu menu-horizontal px-1 lg:text-xl ">
+            <li className="hover:text-red-600">
+              <Link to="/product/category/1">Men</Link>
             </li>
-            <li>
-              <Link to="/admin/list">Category</Link>
+            <li className="hover:text-red-600">
+              <Link to="/product/category/2">Ladies</Link>
             </li>
-            <li>
-              <Link to="/admin/list">Buyer</Link>
+            <li className="hover:text-red-600">
+              <Link to="/product/category/3">Kids</Link>
             </li>
-            <li>
-              <Link to="/admin/list">Product</Link>
+            <li className="hover:text-red-600">
+              <Link to="/user/product">All Product</Link>
             </li>
-            <li>
-              <Link to="/admin/list">Transaction</Link>
+            <li className="hover:text-red-600">
+              <Link to="/transaction">My Transaction</Link>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <Button onClick={Logout}>Logout </Button>
+          <Button onClick={Logout}>Login</Button>
         </div>
       </div>
     </>

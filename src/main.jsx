@@ -15,6 +15,9 @@ import CreateBuyer from "./components/pages/Admin/Buyer/create";
 import ListBuyer from "./components/pages/Admin/Buyer/listBuyer";
 import ListProduct from "./components/pages/Admin/Product/listProduct";
 import CreateProduct from "./components/pages/Admin/Product/create";
+import LandingPage from "./components/pages/User/landingPage";
+import Transaction from "./components/pages/User/transactionPage";
+import ProductCategory from "./components/pages/User/productCategory";
 
 const router = createBrowserRouter([
   // USER SECTION
@@ -28,10 +31,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/user/dashboard",
-    element: <Login />,
+    element: <LandingPage />,
   },
   {
-    path: "/product",
+    path: "/user/product",
     element: <Product />,
   },
   {
@@ -42,7 +45,11 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
-
+  {
+    path: "/user/transaction",
+    element: <Transaction />,
+  },
+  { path: "/product/category/:id", element: <ProductCategory /> },
   // ADMIN SECTION
   // Login
   {

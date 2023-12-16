@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import NavBar from "../../Fragments/navBarAdmin";
+import NavBar from "../../Fragments/navBarUser";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Category from "../../Fragments/category";
+import Skeleton from "../../Elements/Skeleton/skeleton";
 
 const Product = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getAllProduct = async () => {
     try {
-      const { data } = await axios.get("https://dummyjson.com/products");
+      const { data } = await axios.get("http://localhost:3030/product/all");
+      setIsLoading(false);
       if (data) {
-        console.log(data.products);
-        setProducts(data.products);
+        console.log(data.data);
+        setProducts(data.data);
       }
     } catch (error) {
       console.log(error);
@@ -29,26 +31,46 @@ const Product = () => {
   }, []);
 
   return (
-    <div>
-      {/* <NavBar /> */}
-      <Category />
-      <div className="mx-5 mt-20 ">
-        <h2>Lorem ipsum dolor sit amet.</h2>
-        <div className="grid grid-cols-2 justify-center gap-5">
+    <div className="max-w-full ">
+      <NavBar />
+      <div className="flex ">
+        {isLoading && <Skeleton cards={30} />}
+        {products.map((product) => (
+          <div className="mx-5 mt-20">
+            <div className="card w-96 bg-base-100 shadow-xl">
+              <div className="card-body">
+                <h2 className="card-title">{product.productName}</h2>
+                <p>{product.description}</p>
+                <p>{product.price}</p>
+              </div>
+              <figure>
+                <img
+                  src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                  alt="Shoes"
+                />
+              </figure>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* <div className="flex flex-wrap justify-center gap-5 sm:gap-20 lg:grid lg:grid-cols-3 lg:mx-14">
+          {isLoading && <Skeleton cards={30} />}
           {products.map((product) => (
-            <div className=" ">
+            <div className="">
+              <span>{product.description}</span>
               <img
-                src={product.images[0]}
+                src={product.thumbnail}
                 alt=""
-                className="w-44 h-64 "
+                className="w-44 h-64 shadow-lg border-2 lg:w-80 lg:h-96"
                 onClick={() => {
                   productDetail(product.id);
+                  console.log(product.id);
                 }}
               />
             </div>
           ))}
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 };

@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react";
 import ButtonBuy from "../../Elements/Button/ButtonBuy";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { data } from "autoprefixer";
-import NavBar from "../../Fragments/navBarAdmin";
+import NavBar from "../../Fragments/navBarUser";
+import Button from "../../Elements/Button/Button";
 
 const ProductDetail = () => {
   const [buy, setBuy] = useState(0);
-  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getProductById = async () => {
     try {
       const { data } = await axios.get(`https://dummyjson.com/products/${id}`);
       if (data) {
         console.log(data);
-        setProducts(data);
+        setProduct(data);
       }
     } catch (error) {
       console.log(error);
@@ -28,29 +30,34 @@ const ProductDetail = () => {
 
   const handleClick = () => {
     setBuy(console.log("Saya di klik"));
+    localStorage.setItem("product", product.id);
+    navigate("/transaction");
   };
   return (
     <div>
       <NavBar />
-      <div className="max-w-none text-lg m-5 sm:m-7 ">
-        <div className="flex flex-col ">
-          <div className=" flex flex-row overflow-x-scroll my-5 border-2 shadow-md">
-            {/* we got problem in here 😒 */}
-            <img
-              src="https://i.kym-cdn.com/photos/images/newsfeed/002/486/154/c06.gif"
-              alt=""
-            />
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col sm:flex-row xl:max-w-4xl">
+          <img
+            src="../public/Images/Men-assets/Shirt/1a.jpg"
+            className="max-w-sm rounded-lg shadow-2xl w-60 xl:w-72"
+          />
+          <div className="flex flex-col sm:">
+            <h1 className="text-2xl font-bold">{product.brand}</h1>
+            <span className="block">Price: {product.price}</span>
+            <span className="block">Stock: {product.stock}</span>
+            <div className="py-3">
+              <Button
+                width={"w-full sm:w-1/2"}
+                onClick={() => {
+                  navigate("/user/transaction");
+                }}
+              >
+                Buy Now
+              </Button>
+            </div>
+            <p className="py-6">{product.description}</p>
           </div>
-          <div className="flex flex-col text-lg">
-            <h3 className="font-bold 2">{products.brand}</h3>
-            <span className="font-medium">{products.price}</span>
-            <span className="text-xs">{products.stock}</span>
-          </div>
-          <div className="flex flex-col justify-evenly gap-2 mt-2 mb-3 ">
-            <ButtonBuy onClick={handleClick}>BELI SEKARANG</ButtonBuy>
-            {/* <Button onClick={handleClick}>CHECKOUT</Button> */}
-          </div>
-          <span className="text-sm text-justify">{products.description}</span>
         </div>
       </div>
     </div>

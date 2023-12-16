@@ -20,15 +20,18 @@ const CreateProduct = () => {
 
   // Cara 2
   const [data, setData] = useState({
-    category_name: "",
-    category_name: "",
-    category_name: "",
-    category_name: "",
-    category_name: "",
-    category_name: "",
-    category_name: "",
-    category_name: "",
+    product_name: "",
+    category_id: "",
+    seller_id: "",
+    price: "",
+    description: "",
+    stock: "",
+    thumbnail: "",
   });
+
+  const [dataCategory, setDataCategory] = useState();
+  const [dataSeller, setDataSeller] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { id } = useParams();
   console.log(id);
@@ -36,13 +39,50 @@ const CreateProduct = () => {
   const navigate = useNavigate();
 
   const bodyParameters = {
-    name_category: data.category_name,
+    name_product: data.product_name,
+    category_id: data.category_id,
+    seller_id: data.seller_id,
+    price: data.price,
+    description: data.description,
+    stock: data.stock,
+    thumbnail: data.thumbnail,
   };
 
   const auth = localStorage.getItem("token");
 
   const config = {
     headers: { Authorization: `Bearer ${auth}` },
+  };
+
+  const getDataCategory = async () => {
+    try {
+      const { data } = await axios.get(
+        import.meta.env.VITE_API_Category + "/all",
+        config
+      );
+
+      if (data) {
+        setDataCategory(data.data);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getDataSeller = async () => {
+    try {
+      const { data } = await axios.get(
+        import.meta.env.VITE_API_Seller + "/all"
+      );
+
+      if (data) {
+        setDataSeller(data.data);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -61,7 +101,7 @@ const CreateProduct = () => {
       // API Post Data
       axios
         .post(
-          import.meta.env.VITE_API_Category + "/create",
+          import.meta.env.VITE_API_Product + "/create",
           bodyParameters,
           config
         )
@@ -70,13 +110,13 @@ const CreateProduct = () => {
           navigate("/admin/category/list");
         })
         .catch(function (error) {
-          console.log(error.response.data.message);
+          alert(error.response.data.message);
         });
     } else {
       // API PATCH DATA
       axios
         .patch(
-          import.meta.env.VITE_API_Category + "/" + id,
+          import.meta.env.VITE_API_Product + "/" + id,
           bodyParameters,
           config
         )
@@ -85,15 +125,15 @@ const CreateProduct = () => {
           navigate("/admin/category/list");
         })
         .catch(function (error) {
-          console.log(error.response.data.message);
+          alert(error.response.data.message);
         });
     }
   };
 
+  // API GET DATA
   const handleUpdate = (e) => {
-    // API GET DATA
     axios
-      .get(import.meta.env.VITE_API_Category + "/" + id)
+      .get(import.meta.env.VITE_API_Product + "/" + id)
       .then(function (response) {
         setData({
           ...data,
@@ -109,6 +149,8 @@ const CreateProduct = () => {
     } else {
       handleSubmit();
     }
+    getDataSeller();
+    getDataCategory();
   }, [id]);
 
   console.log(data);
@@ -128,32 +170,68 @@ const CreateProduct = () => {
           <Input
             type="text"
             label="Product Name"
-            name="category_name"
-            value={data.category_name}
+            name="product_name"
+            value={data.product_name}
             onChange={handleChange}
             inputText="text-black"
           />
-          <Input
-            type="text"
-            label="Category Name"
-            name="category_name"
-            value={data.category_name}
-            onChange={handleChange}
-            inputText="text-black"
-          />
-          <Input
-            type="text"
-            label="Seller Name"
-            name="seller_name"
-            value={data.category_name}
-            onChange={handleChange}
-            inputText="text-black"
-          />
+          <div>
+            <label className="form-control w-full max-w-xs mb-2">
+              <div className="label">
+                <span className="label-text">Category Name</span>
+              </div>
+              <select
+                className="select bg-white"
+                name="category_id"
+                onChange={handleChange}
+              >
+                <option disabled selected>
+                  Pick one
+                </option>
+                {dataCategory?.map((item, key) => {
+                  return (
+                    <>
+                      <option key={key} value={item.id}>
+                        {item.categoryName}
+                      </option>
+                    </>
+                  );
+                })}
+              </select>
+            </label>
+          </div>
+
+          <div>
+            <label className="form-control w-full max-w-xs mb-2">
+              <div className="label">
+                <span className="label-text">Seller Name</span>
+              </div>
+              <select
+                className="select bg-white"
+                name="seller_id"
+                onChange={handleChange}
+              >
+                <option disabled selected>
+                  Pick one
+                </option>
+                {dataSeller?.map((item, key) => {
+                  return (
+                    <>
+                      <option key={key} value={item.id}>
+                        {item.fullName}
+                      </option>
+                    </>
+                  );
+                })}
+              </select>
+            </label>
+          </div>
+
           <Input
             type="text"
             label="Price"
             name="price"
-            value={data.category_name}
+            value={data.price}
             onChange={handleChange}
             inputText="text-black"
           />
@@ -161,7 +239,7 @@ const CreateProduct = () => {
             type="text"
             label="description"
             name="description"
-            value={data.category_name}
+            value={data.description}
             onChange={handleChange}
             inputText="text-black"
           />
@@ -169,7 +247,7 @@ const CreateProduct = () => {
             type="text"
             label="Stock"
             name="stock"
-            value={data.category_name}
+            value={data.stock}
             onChange={handleChange}
             inputText="text-black"
           />
@@ -177,7 +255,7 @@ const CreateProduct = () => {
             type="file"
             label="Thumbnail"
             name="thumbnail"
-            value={data.category_name}
+            value={data.thumbnail}
             onChange={handleChange}
             inputText="text-black"
           />

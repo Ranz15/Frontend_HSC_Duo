@@ -100,7 +100,7 @@ const ListProduct = () => {
                       <td>
                         <Button
                           btnUI="btn-info"
-                          onClick={() => navigate(`/admin/category/${item.id}`)}
+                          onClick={() => navigate(`/admin/product/${item.id}`)}
                         >
                           Edit
                         </Button>

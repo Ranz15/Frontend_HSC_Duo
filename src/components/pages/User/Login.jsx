@@ -3,6 +3,7 @@ import Button from "../../Elements/Button/Button";
 import Input from "../../Elements/Input/index";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../Fragments/navBarUser";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -38,8 +39,9 @@ const Login = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col justify-center min-h-screen text-black mx-5 gap-y-7">
+    <div>
+      <Navbar />
+      <div className="flex flex-col justify-center mx-auto min-h-screen text-black gap-y-7 sm:w-1/2 xl:w-1/4">
         <div className="">
           <h1 className="text-3xl font-bold mb-2">Login</h1>
           <p className="font-medium ">Welcome, Please enter your details</p>
@@ -78,7 +80,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

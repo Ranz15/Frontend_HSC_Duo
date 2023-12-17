@@ -4,13 +4,17 @@ import Navbar from "../../Fragments/navBarAdmin";
 
 const Dashboard = () => {
   const token = localStorage.getItem("token");
-  console.log(token);
+  const nameLogin = localStorage.getItem("name");
+  // console.log(token);
 
   return (
     <>
       <Navbar />
       <div className="container mx-5">
-        <h1>Welcome to Dashboard Admin</h1>
+        <h1>
+          Hay <span className="font-bold text-lg">{`${nameLogin}`}</span>,
+          Welcome to Dashboard Admin
+        </h1>
       </div>
     </>
   );

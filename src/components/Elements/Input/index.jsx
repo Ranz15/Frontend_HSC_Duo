@@ -19,7 +19,7 @@ const Input = ({
         id={name}
         name={name}
         value={value}
-        className="bg-white text-sm border rounded-w-full w-full py-2 px-2 text-black placeholder:opacity-10"
+        className={`${inputBg} text-sm border rounded-w-full w-full py-2 px-2 ${inputText} placeholder:opacity-10`}
       />
     </>
   );

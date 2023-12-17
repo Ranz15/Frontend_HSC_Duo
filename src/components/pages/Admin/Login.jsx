@@ -4,82 +4,97 @@ import Input from "../../Elements/Input/index";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const LoginAdmin = () => {
+  const [dataLogin, setDataLogin] = useState({
+    username: "",
+    password: "",
+  });
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setUsername(e.target.value);
+    setDataLogin({
+      ...dataLogin,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const onLogin = () => {
+  const LoginAdmin = () => {
     axios
-      .post(import.meta.env.VITE_API_Login + "/buyer", {
-        username: username,
-        password: password,
+      .post(import.meta.env.VITE_API_Login + "/seller", {
+        username: dataLogin.username,
+        password: dataLogin.password,
       })
       .then(function (response) {
-        // console.log(response.data.token);
+        console.log(response);
         localStorage.setItem("token", response.data.token);
-        navigate("/");
+        localStorage.setItem("name", response.data.userData.fullName);
+        localStorage.setItem("id", response.data.userData.id);
+        navigate("/admin/dashboard");
       })
       .catch(function (error) {
-        alert(error.response.data.message);
+        console.log(error.response.data.message);
+        setError(error.response.data.message);
       });
   };
 
-  const onRegister = () => {
-    return navigate("/register");
-  };
+  // console.log(dataLogin);
 
   return (
     <>
-      <div className="flex flex-col justify-center min-h-screen text-black mx-5 gap-y-7">
-        <div className="">
-          <h1 className="text-3xl font-bold mb-2">Login</h1>
-          <p className="font-medium ">Welcome, Please enter your details</p>
-        </div>
-        <div className="gap-y-5">
-          <div className="mb-5">
-            <Input
-              label="Email"
-              name="email"
-              type="email"
-              value={username}
-              onChange={handleChange}
+      <main className="flex justify-center items-center h-screen bg-gray-400">
+        <div className="text-base w-96 p-5 bg-slate-100 rounded-md">
+          {/* Tampilan Logo */}
+          <div className="flex items-center justify-center mb-4">
+            <img
+              src="../../../../public/Images/Logo/H_M_Logo.png"
+              alt="Logo H&M"
+              width="100"
             />
           </div>
-          <div className="mb-10">
+          {error ? (
+            <>
+              <div className="bg-red-500 text-center py-1 w-full mb-4">
+                {/* Menampilkan pesan error */}
+                <p className="text-white">{error}</p>
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+
+          <div className="flex flex-col gap-3">
+            <Input
+              label="Username"
+              name="username"
+              onChange={handleChange}
+              type="text"
+              value={dataLogin.username}
+              inputBg="bg-slate-100"
+            />
+
             <Input
               label="Password"
               name="password"
+              onChange={handleChange}
               type="password"
-              value={password}
-              onChange={handleChangePassword}
+              value={dataLogin.password}
+              inputBg="bg-slate-100"
             />
           </div>
-          <div className="flex flex-col">
-            <Button onClick={onLogin} width={"w-full"}>
+          <div className="my-5">
+            <Button
+              width="w-full"
+              Bgcolor="btn btn-primary"
+              onClick={LoginAdmin}
+            >
               Login
-            </Button>
-            <div className="flex justify-center items-center gap-3  ">
-              <span className="w-full h-[2px]  bg-black"></span>
-              <p>OR</p>
-              <span className="w-full h-[2px]  bg-black"></span>
-            </div>
-            <Button onClick={onRegister} width={"w-full"}>
-              Register
             </Button>
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 };
 
-export default Login;
+export default LoginAdmin;

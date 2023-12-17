@@ -34,7 +34,7 @@ const CreateProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
   const navigate = useNavigate();
 
@@ -107,10 +107,10 @@ const CreateProduct = () => {
         )
         .then(function (response) {
           console.log(response);
-          navigate("/admin/category/list");
+          navigate("/admin/product/list");
         })
         .catch(function (error) {
-          alert(error.response.data.message);
+          console.log(error.response.data.message);
         });
     } else {
       // API PATCH DATA
@@ -122,10 +122,10 @@ const CreateProduct = () => {
         )
         .then(function (response) {
           console.log(response);
-          navigate("/admin/category/list");
+          navigate("/admin/product/list");
         })
         .catch(function (error) {
-          alert(error.response.data.message);
+          console.log(error.response.data.message);
         });
     }
   };
@@ -133,11 +133,17 @@ const CreateProduct = () => {
   // API GET DATA
   const handleUpdate = (e) => {
     axios
-      .get(import.meta.env.VITE_API_Product + "/" + id)
+      .get(import.meta.env.VITE_API_Product + "/filter/" + id)
       .then(function (response) {
         setData({
           ...data,
-          category_name: response.data.data.categoryName,
+          product_name: response.data.data.productName,
+          category_id: response.data.data.category_id,
+          seller_id: response.data.data.seller_id,
+          price: response.data.data.price,
+          description: response.data.data.description,
+          stock: response.data.data.stock,
+          thumbnail: response.data.data.thumbnail,
         });
         console.log(response);
       });
@@ -153,7 +159,7 @@ const CreateProduct = () => {
     getDataCategory();
   }, [id]);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -255,7 +261,7 @@ const CreateProduct = () => {
             type="file"
             label="Thumbnail"
             name="thumbnail"
-            value={data.thumbnail}
+            value={id === "new" ? data.thumbnail : ""}
             onChange={handleChange}
             inputText="text-black"
           />

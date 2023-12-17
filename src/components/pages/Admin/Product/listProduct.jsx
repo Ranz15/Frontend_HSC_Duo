@@ -39,7 +39,7 @@ const ListProduct = () => {
   const deleteData = async (id) => {
     try {
       const { data } = await axios.delete(
-        import.meta.env.VITE_API_Product + "/" + id,
+        import.meta.env.VITE_API_Product + "/delete/" + id,
         config
       );
       getData();
@@ -48,7 +48,7 @@ const ListProduct = () => {
     }
   };
 
-  console.log(dataProduct);
+  // console.log(dataProduct);
 
   return (
     <>

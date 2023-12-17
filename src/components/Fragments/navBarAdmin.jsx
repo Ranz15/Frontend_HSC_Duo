@@ -6,7 +6,9 @@ const Navbar = () => {
 
   const Logout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    localStorage.removeItem("name");
+    localStorage.removeItem("id");
+    navigate("/admin/login");
   };
 
   return (
@@ -80,7 +82,9 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Button onClick={Logout}>Logout </Button>
+          <Button onClick={Logout} width="">
+            Logout{" "}
+          </Button>
         </div>
       </div>
     </>

@@ -48,7 +48,7 @@ const ListCategory = () => {
     }
   };
 
-  console.log(dataCategory);
+  // console.log(dataCategory);
 
   return (
     <>

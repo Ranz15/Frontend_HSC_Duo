@@ -37,18 +37,22 @@ const ProductDetail = () => {
     <div>
       <NavBar />
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col sm:flex-row xl:max-w-4xl">
+        <div className="hero-content flex-col sm:flex-row ">
           <img
             src="../public/Images/Men-assets/Shirt/1a.jpg"
-            className="max-w-sm rounded-lg shadow-2xl w-60 xl:w-72"
+            className=" rounded-2xl shadow-2xl w-64 lg:w-96 lg:shadow-xl xl:mr-5 "
           />
-          <div className="flex flex-col sm:">
-            <h1 className="text-2xl font-bold">{product.brand}</h1>
-            <span className="block">Price: {product.price}</span>
-            <span className="block">Stock: {product.stock}</span>
+          <div className="flex flex-col lg:text-xl">
+            <h1 className="text-2xl font-bold lg:mb-5 lg:text-5xl">
+              {product.brand}
+            </h1>
+            <span className="block xl:text-xl">Price: {product.price}</span>
+            <span className="block xl:text-xl">Stock: {product.stock}</span>
             <div className="py-3">
               <Button
-                width={"w-full sm:w-1/2"}
+                width={
+                  "w-full sm:w-full lg:w-3/4 xl:w-full lg:h-12 xl:text-2xl"
+                }
                 onClick={() => {
                   navigate("/user/transaction");
                 }}
@@ -56,7 +60,7 @@ const ProductDetail = () => {
                 Buy Now
               </Button>
             </div>
-            <p className="py-6">{product.description}</p>
+            <p className="xl:text-xl">{product.description}</p>
           </div>
         </div>
       </div>
